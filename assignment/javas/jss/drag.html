@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .matrix-container {
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      gap: 5px;
+      margin: 20px auto;
+    }
+
+    .draggable {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #ccc;
+      background-color: #f0f0f0;
+      text-align: center;
+      line-height: 50px;
+      cursor: grab;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="matrix-container" id="matrix">
+  <!-- Initial matrix content -->
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">1</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">2</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">3</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">4</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">5</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">6</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">7</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">8</div>
+  <div class="draggable" draggable="true" ondragstart="dragStart(event)">9</div>
+</div>
+
+<script>
+  function dragStart(event) {
+    event.dataTransfer.setData('text/plain', event.target.innerText);
+  }
+
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+
+  function drop(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData('text/plain');
+    const draggedElement = document.querySelector('.draggable');
+    const targetElement = event.target;
+
+    if (targetElement.classList.contains('draggable')) {
+      // Swap the text content of the dragged and target elements
+      const temp = targetElement.innerText;
+      targetElement.innerText = data;
+      draggedElement.innerText = temp;
+    }
+  }
+
+  // Add dragover and drop event listeners to the matrix container
+  const matrixContainer = document.getElementById('matrix');
+  matrixContainer.addEventListener('dragover', allowDrop);
+  matrixContainer.addEventListener('drop', drop);
+</script>
+
+</body>
+</html>

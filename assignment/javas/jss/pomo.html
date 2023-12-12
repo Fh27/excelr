@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f4f4f4;
+    }
+
+    #timer {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    button {
+      font-size: 1em;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      background-color: green;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+    .reset{
+        font-size: 1em;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      background-color: red;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+.stop{
+    font-size: 1em;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      background-color: orange;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+}
+    button:hover {
+      background-color: #45a049;
+    }
+
+    input {
+      width: 40px;
+      text-align: center;
+      font-size: 1em;
+      margin: 0 5px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div>
+  <label for="workLength">Work Length (minutes): </label>
+  <input type="number" id="workLength" value="25" min="1">
+</div>
+<div>
+  <label for="breakLength">Break Length (minutes): </label>
+  <input type="number" id="breakLength" value="5" min="1">
+</div>
+<div id="timer">25:00</div>
+<div id="controls">
+  <button onclick="startTimer()">Start</button>
+  <button class="reset" onclick="pauseTimer()">Stop</button>
+  <button class="stop" onclick="resetTimer()">Reset</button>
+</div>
+
+<script>
+  let timer;
+  let workMinutes = 25;
+  let breakMinutes = 5;
+  let seconds = 0;
+  let isPaused = false;
+
+  function updateTimerDisplay() {
+    const timerDisplay = document.getElementById('timer');
+    timerDisplay.textContent = `${String(workMinutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
+
+  function startTimer() {
+    if (!timer) {
+      timer = setInterval(() => {
+        if (!isPaused) {
+          if (seconds > 0) {
+            seconds--;
+          } else if (workMinutes > 0) {
+            seconds = 59;
+            workMinutes--;
+          } else {
+            clearInterval(timer);
+            timer = null;
+            alert("Pomodoro Completed! Take a break.");
+            workMinutes = document.getElementById('workLength').value;
+            seconds = 0;
+            updateTimerDisplay();
+          }
+
+          updateTimerDisplay();
+        }
+      }, 1000);
+    }
+  }
+
+  function pauseTimer() {
+    isPaused = !isPaused;
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = null;
+    workMinutes = document.getElementById('workLength').value;
+    breakMinutes = document.getElementById('breakLength').value;
+    seconds = 0;
+    isPaused = false;
+    updateTimerDisplay();
+  }
+</script>
+
+</body>
+</html>

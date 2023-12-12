@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<input type="text" name="txt" value="Hello" onchange="myFunction(this.value)">
+<input type="text" id="text1" name="txt1" value="" onchange="myFunction1(this.vlaue)">
+<marquee id="pp"></marquee>
+<script>
+function myFunction(val) {
+  alert(val);
+}
+function myFunction1(value){
+let r=document.getElementById("text1").value
+document.getElementById("pp").innerHTML+=r
+}
+</script>
+
+</body>
+</html>

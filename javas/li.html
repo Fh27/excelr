@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ol id="demo">
+      <li>Mango</li>
+      <li>Banaana</li>
+      <li>apple</li>
+    </ol>
+    <hr>
+    <ol id="demo1">
+      <li>Mango</li>
+      <li>Banaana</li>
+      <li>apple</li>
+    </ol>
+    <hr>
+    <div id="div1">
+      <p id="p1">This is a paragraph.</p>
+    </div>
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere nobis illum exercitationem architecto maiores hic doloribus eveniet soluta quam, laudantium quisquam laborum adipisci quasi, sed, sint enim a labore?</p>
+    <script>
+     //insertAdjacentElement
+      let lsi = document.getElementById("demo");
+      lsi.style.color="blue"
+      lsi.insertAdjacentHTML("beforebegin", "<h1>insertAdjacentElement</h1>");
+      lsi.insertAdjacentHTML("afterbegin", "<h3>Fruits</h3>");
+      lsi.insertAdjacentHTML("beforeend", "<li>Footer</li>");
+      lsi.insertAdjacentHTML("afterend", "<p>End</p>");
+      //clone
+    //    let real=document.querySelector('#demo')
+    //    let clone=real.cloneNode(true)
+    //    document.body.appendChild(clone)
+
+    //replaceChild
+      let lsi2 = document.getElementById("demo1");
+      let newel = document.createElement("li");
+      newel.textContent = "Straweberry";
+      lsi2.replaceChild(newel, lsi2.lastElementChild);
+
+      let lsi3 = document.querySelector("#demo1");
+lsi3.style.color='pink'
+
+    //   remove
+    //   let real1=document.querySelector('#demo')
+    //   real1.remove()
+
+//insertbefore
+      const para = document.createElement("p");
+const node = document.createTextNode("This is new.");
+para.appendChild(node);
+
+const element = document.getElementById("div1");
+const child = document.getElementById("p1");
+element.insertBefore(para,child);
+
+    </script>
+  </body>
+</html>

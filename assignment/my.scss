@@ -1,0 +1,9 @@
+@mixin important-text {
+    color: red;
+    border: 2px dashed blue;
+  }
+  
+  .danger {
+    @include important-text;
+    background-color: green;
+  }                  
